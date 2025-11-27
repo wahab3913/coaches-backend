@@ -28,14 +28,20 @@ const allowedOrigins = [
 ].filter(Boolean) as string[];
 
 app.use(cors({ 
-  origin: true,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
   exposedHeaders: ['Set-Cookie']
 }));
 
-console.log('✅ CORS enabled for all origins (temporary fix)');
 console.log('🔒 Allowed Origins:', allowedOrigins);
 app.use(express.json());
 app.use(cookieParser());
