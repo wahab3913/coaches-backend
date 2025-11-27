@@ -41,6 +41,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
   exposedHeaders: ['Set-Cookie']
 }));
+
+console.log('🔒 Allowed Origins:', allowedOrigins);
 app.use(express.json());
 app.use(cookieParser());
 
