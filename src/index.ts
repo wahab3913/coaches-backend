@@ -46,8 +46,8 @@ console.log('🔒 Allowed Origins:', allowedOrigins);
 app.use(express.json());
 app.use(cookieParser());
 
-// Rate limiting - Apply to all API routes
-app.use('/api/', apiLimiter);
+// Rate limiting - Apply to all API routes (COMMENTED FOR TESTING)
+// app.use('/api/', apiLimiter);
 
 // Database connection
 connectDB();
